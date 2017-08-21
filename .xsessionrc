@@ -1,0 +1,2 @@
+adjust-screens.sh
+setxkbmap us,il , grp:rctrl_toggle,ctrl:nocaps

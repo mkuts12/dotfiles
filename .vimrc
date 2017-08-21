@@ -10,7 +10,7 @@ set nocompatible
 set hidden
 " remember more commands and search history
 set history=10000
-set expandtab
+" set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -23,7 +23,6 @@ set hlsearch
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 " highlight current line
-set cursorline cursorcolumn
 set cmdheight=1
 set switchbuf=useopen
 set showtabline=2
@@ -66,7 +65,7 @@ set nofoldenable
 set nojoinspaces
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
-set relativenumber
+set relativenumber number
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,8 +80,8 @@ augroup vimrcEx
     \ endif
 
   "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python set sw=4 sts=4 et
+  " autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  " autocmd FileType python set sw=4 sts=4 et
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
@@ -107,12 +106,6 @@ augroup vimrcEx
   autocmd! FileType *.slim set sw=2 sts=2 et
 augroup END
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COLOR
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set t_Co=256 " 256 colors
-:set background=dark
-:color base16-eighties
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -122,9 +115,9 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>y "*y
-map <leader>p "*p
-map <leader>P "*P
+map <leader>y "+y
+map <leader>p "+p
+map <leader>P "+P
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -137,12 +130,16 @@ inoremap <c-c> <esc>
 nnoremap <leader><leader> <c-^>
 " Align selected lines
 inoremap jk <esc>
-inoremap <esc> <nop>
-imap <c-q> :noh<cr>
+map <c-q> :noh<cr>
 map <leader>dd :bd<cr>
+map <leader>DD :bd!<cr>
 map <leader>q :bp<cr>
 map <leader>e :bn<cr>
+map ; :
 map <leader>t :NERDTreeToggle<cr>
+map <leader>rc :e ~/.vimrc<cr>
+map j gj
+map k gk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
@@ -190,6 +187,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+Plugin 'chriskempson/base16-vim'
+Plugin 'https://github.com/leafgarland/typescript-vim.git'
 
 call vundle#end()
 
@@ -223,3 +222,25 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_save = 1
 let g:syntastic_check_on_wq = 0
+
+" CTRL-P
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/](node_modules|\.git)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ }
+let g:ctrlp_working_path_mode = ''
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("gui_running")
+  set t_Co=256 " 256 colors
+  let base16colorspace=256
+  set background=dark
+  colorscheme base16-eighties
+  set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
+  set cursorline cursorcolumn
+  set guioptions-=m
+  set guioptions-=T
+  set guioptions-=r
+  set guioptions-=L
+endif
