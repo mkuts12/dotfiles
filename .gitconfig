@@ -1,0 +1,17 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Michael Kutz
+	email = michael.k@walkme.walkme.com
+[push]
+	default = simple
+[diff]
+	tool = kdiff3
+[merge]
+	tool = extMerge
+[mergetool "extMerge"]
+	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	trustExitCode = false
+[alias]
+	co = checkout
+	da = difftool -d
