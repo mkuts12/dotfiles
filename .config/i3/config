@@ -133,6 +133,11 @@ bindsym XF86AudioMute exec pactl set-sink-mute `pactl list sinks | grep -B 1 -ie
 bindsym XF86AudioLowerVolume exec pactl set-sink-mute `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` false && pactl set-sink-volume `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` -5%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-mute `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` false && pactl set-sink-volume `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` +5%
 
+# kbd-lights
+bindsym XF86KbdBrightnessDown exec kb-light.py -
+bindsym XF86KbdBrightnessUp exec kb-light.py +
+
+
 # misc
 bindsym Print exec escrotum -sC
 bindsym XF86MonBrightnessDown exec sudo bright_down.sh
