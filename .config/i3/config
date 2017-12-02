@@ -126,11 +126,18 @@ bindsym $mod+Shift+e exec "i3-msg exit"
 # lock computer
 bindsym $mod+Escape exec --no-startup-id gnome-screensaver-command -l
 # do not follow mouse
-focus_follows_mouse no
+
+
 # sound
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $2}'` -10%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $2}'` +10%
-bindsym XF86AudioMute exec pactl set-sink-mute `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $2}'` toggle
+bindsym XF86AudioMute exec pactl set-sink-mute `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-mute `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` false && pactl set-sink-volume `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-mute `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` false && pactl set-sink-volume `pactl list sinks | grep -B 1 -ie "state: running" | head -n 1 | cut -d# -f 2` +5%
+
+# misc
+bindsym Print exec escrotum -sC
+bindsym XF86MonBrightnessDown exec sudo bright_down.sh
+bindsym XF86MonBrightnessUp exec sudo bright_up.sh
+bindsym Pause exec xfconf-query -c xfce4-notifyd -p /do-not-disturb -T
 
 
 # resize window (you can also use the mouse for that)
