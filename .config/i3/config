@@ -126,6 +126,18 @@ bindsym $mod+Shift+e exec "i3-msg exit"
 # lock computer
 bindsym $mod+Escape exec --no-startup-id gnome-screensaver-command -l
 # do not follow mouse
+focus_follows_mouse no
+# work sound
+#bindsym XF86AudioLowerVolume exec pactl set-sink-mute `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $NF}'` 0 && pactl set-sink-volume `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $NF}'` -10%
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-mute `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $NF}'` 0 && pactl set-sink-volume `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $NF}'` +10%
+#bindsym XF86AudioMute exec pactl set-sink-mute `pacmd list-sinks  | grep -B 4 -e "state: RUNNING" | grep index| awk '{print $NF}'` toggle
+# work screen capture
+#bindsym Ctrl+Print exec scrot -s -e 'mv $f ~/captures' '%T.jpg'
+#bindsym $mod+Print exec simplescreenrecorder
+#bindsym Print exec simplescreenrecorder
+# work screen brightness
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 
 # sound
